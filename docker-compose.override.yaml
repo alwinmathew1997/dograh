@@ -1,0 +1,11 @@
+# Builds the ui image from local source instead of pulling it from a
+# registry, so server-side `git pull` + rebuild picks up local UI changes.
+# Compose auto-loads this file alongside docker-compose.yaml — no extra
+# flags needed. Remove this file to go back to pulling the prebuilt image.
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
+    image: dograh-local/dograh-ui:local
+    pull_policy: never
