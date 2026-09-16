@@ -311,7 +311,7 @@ export default function TelephonyConfigurationDetailPage() {
                     This configuration is disabled
                   </p>
                   <p className="text-muted-foreground">
-                    Dograh stopped reconnecting after repeated connection
+                    IntellifyAI stopped reconnecting after repeated connection
                     failures
                     {config.inactive_reason ? `: ${config.inactive_reason}` : ""}.
                     Calls will not work until it is reconnected. Correct the
@@ -346,7 +346,7 @@ export default function TelephonyConfigurationDetailPage() {
               <p className="text-xs text-muted-foreground">
                 Add this line to your Asterisk <code>extensions.conf</code>, then run{" "}
                 <code>dialplan reload</code>. Until you do, calls reach Asterisk but never
-                arrive at Dograh.
+                arrive at IntellifyAI.
               </p>
               <button
                 type="button"
@@ -523,16 +523,16 @@ export default function TelephonyConfigurationDetailPage() {
                         {config.trunks?.find(
                           (t) => t.id === n.telephony_trunk_id,
                         )?.name ?? (
-                          <span
-                            className={
-                              (config.trunks?.length ?? 0) > 1
-                                ? "text-amber-600 dark:text-amber-500"
-                                : undefined
-                            }
-                          >
-                            Unassigned
-                          </span>
-                        )}
+                            <span
+                              className={
+                                (config.trunks?.length ?? 0) > 1
+                                  ? "text-amber-600 dark:text-amber-500"
+                                  : undefined
+                              }
+                            >
+                              Unassigned
+                            </span>
+                          )}
                       </TableCell>
                     )}
                     <TableCell className="text-right">

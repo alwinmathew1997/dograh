@@ -33,7 +33,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dograh",
+  title: "IntellifyAi",
   description: "Open Source Voice Assistant Workflow Builder",
 };
 

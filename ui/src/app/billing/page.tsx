@@ -270,7 +270,7 @@ export default function BillingPage() {
                     <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-600 dark:text-amber-400" />
                     <div className="text-sm text-amber-900 dark:text-amber-200">
                         <p className="font-medium">Credit purchases are unavailable in OSS mode</p>
-                        <p className="mt-1">
+                        {/* <p className="mt-1">
                             You can&apos;t purchase credits from this self-hosted app. Sign up and
                             purchase credits at{" "}
                             <a
@@ -289,11 +289,12 @@ export default function BillingPage() {
                             >
                                 Model Configurations
                             </Link>
-                            . Usage for that service key is visible in app.dograh.com.
-                        </p>
+                            . Usage for that service key is visible in app.dograh.com. */}
+                        {/* </p> */}
                     </div>
                 </div>
-            )}
+            )
+            }
 
             <div className="grid gap-4 md:grid-cols-2">
                 <Card>
@@ -322,127 +323,129 @@ export default function BillingPage() {
                 </Card>
             </div>
 
-            {!isOssMode ? (
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Credit Ledger</CardTitle>
-                        <CardDescription>Recent grants, purchases, and usage debits.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {ledgerEntries.length > 0 ? (
-                            <div className="bg-card border rounded-lg overflow-x-auto shadow-sm">
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow className="bg-muted/50">
-                                            <TableHead>Date</TableHead>
-                                            <TableHead>Activity</TableHead>
-                                            <TableHead>Origin</TableHead>
-                                            <TableHead>Run</TableHead>
-                                            <TableHead className="text-right">Delta</TableHead>
-                                            <TableHead className="text-right">Balance</TableHead>
-                                            <TableHead className="text-right">Amount</TableHead>
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        {ledgerEntries.map((entry) => {
-                                            const delta = entry.credits_delta ?? 0;
-                                            const runHref = getRunHref(entry);
-                                            const billableQuantity = formatBillableQuantity(entry);
-                                            return (
-                                                <TableRow key={entry.id}>
-                                                    <TableCell>
-                                                        {formatDateTime(entry.created_at, organizationTimezone)}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <div className="flex flex-col gap-1">
-                                                            <span className="font-medium">{getLedgerEntryLabel(entry)}</span>
-                                                            {billableQuantity && (
-                                                                <span className="text-xs text-muted-foreground">{billableQuantity}</span>
-                                                            )}
-                                                        </div>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {entry.origin ? (
-                                                            <Badge variant="secondary">{formatTitleCase(entry.origin)}</Badge>
-                                                        ) : (
-                                                            "-"
-                                                        )}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {entry.workflow_run_id ? (
-                                                            runHref ? (
-                                                                <Link className="font-medium text-primary hover:underline" href={runHref}>
-                                                                    #{entry.workflow_run_id}
-                                                                </Link>
+            {
+                !isOssMode ? (
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Credit Ledger</CardTitle>
+                            <CardDescription>Recent grants, purchases, and usage debits.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {ledgerEntries.length > 0 ? (
+                                <div className="bg-card border rounded-lg overflow-x-auto shadow-sm">
+                                    <Table>
+                                        <TableHeader>
+                                            <TableRow className="bg-muted/50">
+                                                <TableHead>Date</TableHead>
+                                                <TableHead>Activity</TableHead>
+                                                <TableHead>Origin</TableHead>
+                                                <TableHead>Run</TableHead>
+                                                <TableHead className="text-right">Delta</TableHead>
+                                                <TableHead className="text-right">Balance</TableHead>
+                                                <TableHead className="text-right">Amount</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {ledgerEntries.map((entry) => {
+                                                const delta = entry.credits_delta ?? 0;
+                                                const runHref = getRunHref(entry);
+                                                const billableQuantity = formatBillableQuantity(entry);
+                                                return (
+                                                    <TableRow key={entry.id}>
+                                                        <TableCell>
+                                                            {formatDateTime(entry.created_at, organizationTimezone)}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <div className="flex flex-col gap-1">
+                                                                <span className="font-medium">{getLedgerEntryLabel(entry)}</span>
+                                                                {billableQuantity && (
+                                                                    <span className="text-xs text-muted-foreground">{billableQuantity}</span>
+                                                                )}
+                                                            </div>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {entry.origin ? (
+                                                                <Badge variant="secondary">{formatTitleCase(entry.origin)}</Badge>
                                                             ) : (
-                                                                <span>#{entry.workflow_run_id}</span>
-                                                            )
-                                                        ) : (
-                                                            "-"
-                                                        )}
-                                                    </TableCell>
-                                                    <TableCell className={`text-right font-medium ${delta >= 0 ? "text-green-600" : "text-destructive"}`}>
-                                                        {delta >= 0 ? "+" : ""}
-                                                        {formatCredits(delta)}
-                                                    </TableCell>
-                                                    <TableCell className="text-right">{formatCredits(entry.balance_after)}</TableCell>
-                                                    <TableCell className="text-right">
-                                                        {formatAmount(entry.amount_minor, entry.amount_currency)}
-                                                    </TableCell>
-                                                </TableRow>
-                                            );
-                                        })}
-                                    </TableBody>
-                                </Table>
-                            </div>
-                        ) : (
-                            <div className="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
-                                No ledger entries yet
-                            </div>
-                        )}
-                        {ledgerTotalPages > 1 && (
-                            <div className="flex items-center justify-between mt-6">
-                                <p className="text-sm text-muted-foreground">
-                                    Page {ledgerPage} of {ledgerTotalPages} ({ledgerTotalCount} total entries)
-                                </p>
-                                <div className="flex gap-2">
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => handlePageChange(ledgerPage - 1)}
-                                        disabled={ledgerPage <= 1 || loading || refreshing}
-                                    >
-                                        <ChevronLeft className="h-4 w-4" />
-                                        Previous
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => handlePageChange(ledgerPage + 1)}
-                                        disabled={ledgerPage >= ledgerTotalPages || loading || refreshing}
-                                    >
-                                        Next
-                                        <ChevronRight className="h-4 w-4" />
-                                    </Button>
+                                                                "-"
+                                                            )}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {entry.workflow_run_id ? (
+                                                                runHref ? (
+                                                                    <Link className="font-medium text-primary hover:underline" href={runHref}>
+                                                                        #{entry.workflow_run_id}
+                                                                    </Link>
+                                                                ) : (
+                                                                    <span>#{entry.workflow_run_id}</span>
+                                                                )
+                                                            ) : (
+                                                                "-"
+                                                            )}
+                                                        </TableCell>
+                                                        <TableCell className={`text-right font-medium ${delta >= 0 ? "text-green-600" : "text-destructive"}`}>
+                                                            {delta >= 0 ? "+" : ""}
+                                                            {formatCredits(delta)}
+                                                        </TableCell>
+                                                        <TableCell className="text-right">{formatCredits(entry.balance_after)}</TableCell>
+                                                        <TableCell className="text-right">
+                                                            {formatAmount(entry.amount_minor, entry.amount_currency)}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                );
+                                            })}
+                                        </TableBody>
+                                    </Table>
                                 </div>
+                            ) : (
+                                <div className="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
+                                    No ledger entries yet
+                                </div>
+                            )}
+                            {ledgerTotalPages > 1 && (
+                                <div className="flex items-center justify-between mt-6">
+                                    <p className="text-sm text-muted-foreground">
+                                        Page {ledgerPage} of {ledgerTotalPages} ({ledgerTotalCount} total entries)
+                                    </p>
+                                    <div className="flex gap-2">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => handlePageChange(ledgerPage - 1)}
+                                            disabled={ledgerPage <= 1 || loading || refreshing}
+                                        >
+                                            <ChevronLeft className="h-4 w-4" />
+                                            Previous
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => handlePageChange(ledgerPage + 1)}
+                                            disabled={ledgerPage >= ledgerTotalPages || loading || refreshing}
+                                        >
+                                            Next
+                                            <ChevronRight className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                ) : (
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Credit Usage</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <Progress value={usagePercent} />
+                            <div className="flex justify-between text-sm text-muted-foreground">
+                                <span>{usagePercent}% used</span>
+                                <span>{formatCredits(remainingCredits)} of {formatCredits(totalQuota)} remaining</span>
                             </div>
-                        )}
-                    </CardContent>
-                </Card>
-            ) : (
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Credit Usage</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <Progress value={usagePercent} />
-                        <div className="flex justify-between text-sm text-muted-foreground">
-                            <span>{usagePercent}% used</span>
-                            <span>{formatCredits(remainingCredits)} of {formatCredits(totalQuota)} remaining</span>
-                        </div>
-                    </CardContent>
-                </Card>
-            )}
-        </div>
+                        </CardContent>
+                    </Card>
+                )
+            }
+        </div >
     );
 }

@@ -23,16 +23,20 @@ export function BrandLogo({
   }
   if (inverse) {
     return (
+      <>
+
+        <img src="/IntellifyAI-logo-white-full.png" alt="Dograh" className={cn("w-auto select-none", className)} />
+
+      </>
       // eslint-disable-next-line @next/next/no-img-element
-      <img src="/dograh-logo-inverse.png" alt="Dograh" className={cn("w-auto select-none", className)} />
     );
   }
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/dograh-logo.png" alt="Dograh" className={cn("block w-auto select-none dark:hidden", className)} />
+      <img src="/IntellifyAI-logo-black-full.png" alt="Dograh" className={cn("block w-auto select-none dark:hidden", className)} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/dograh-logo-inverse.png" alt="Dograh" className={cn("hidden w-auto select-none dark:block", className)} />
+      <img src="/IntellifyAI-logo-white-full.png" alt="Dograh" className={cn("hidden w-auto select-none dark:block", className)} />
     </>
   );
 }

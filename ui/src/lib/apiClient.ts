@@ -47,6 +47,14 @@ export const createClientConfig: CreateClientConfig = (config) => {
     return {
         ...config,
         baseUrl,
+        headers: {
+            ...config?.headers,
+            // No-op against a real backend; skips the browser-warning interstitial
+            // that free-tier ngrok/similar tunnels return for browser requests
+            // (which otherwise looks like a CORS failure since the interstitial
+            // page carries no Access-Control-Allow-Origin header).
+            'ngrok-skip-browser-warning': 'true',
+        },
     };
 };
 

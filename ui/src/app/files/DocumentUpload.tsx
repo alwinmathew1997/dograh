@@ -39,8 +39,8 @@ export default function DocumentUpload({ onUploadSuccess }: DocumentUploadProps)
       <div className="text-xs text-amber-900 dark:text-amber-200">
         <p className="font-medium">Processed by an external service</p>
         <p className="mt-1">
-          Uploaded documents are sent to Dograh&apos;s managed Model Proxy Service for
-          parsing and chunking. Dograh Model Proxy Service does not store or read your documents -
+          Uploaded documents are sent to IntellifyAI&apos;s managed Model Proxy Service for
+          parsing and chunking. IntellifyAI Model Proxy Service does not store or read your documents -
           the extracted text and embeddings are returned and stored locally in your
           self-hosted database.
         </p>
@@ -203,9 +203,8 @@ export default function DocumentUpload({ onUploadSuccess }: DocumentUploadProps)
           <RadioGroup value={retrievalMode} onValueChange={setRetrievalMode}>
             <label
               htmlFor="full_document"
-              className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors ${
-                retrievalMode === 'full_document' ? 'border-primary bg-primary/5' : 'hover:bg-muted/50'
-              }`}
+              className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors ${retrievalMode === 'full_document' ? 'border-primary bg-primary/5' : 'hover:bg-muted/50'
+                }`}
             >
               <RadioGroupItem value="full_document" id="full_document" className="mt-0.5" />
               <div>
@@ -218,9 +217,8 @@ export default function DocumentUpload({ onUploadSuccess }: DocumentUploadProps)
             </label>
             <label
               htmlFor="chunked"
-              className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors ${
-                retrievalMode === 'chunked' ? 'border-primary bg-primary/5' : 'hover:bg-muted/50'
-              }`}
+              className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors ${retrievalMode === 'chunked' ? 'border-primary bg-primary/5' : 'hover:bg-muted/50'
+                }`}
             >
               <RadioGroupItem value="chunked" id="chunked" className="mt-0.5" />
               <div>

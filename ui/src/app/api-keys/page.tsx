@@ -13,7 +13,7 @@ import {
     getServiceKeysApiV1UserServiceKeysGet,
     reactivateApiKeyApiV1UserApiKeysApiKeyIdReactivatePut
 } from '@/client/sdk.gen';
-import type { ApiKeyResponse, CreateApiKeyResponse, CreateServiceKeyResponse,ServiceKeyResponse } from '@/client/types.gen';
+import type { ApiKeyResponse, CreateApiKeyResponse, CreateServiceKeyResponse, ServiceKeyResponse } from '@/client/types.gen';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -87,7 +87,7 @@ export default function APIKeysPage() {
             const response = await getApiKeysApiV1UserApiKeysGet({
                 query: {
 
-                        include_archived: showArchived
+                    include_archived: showArchived
 
                 },
                 headers: {
@@ -271,7 +271,7 @@ export default function APIKeysPage() {
             await reactivateApiKeyApiV1UserApiKeysApiKeyIdReactivatePut({
                 path: {
 
-                        api_key_id: keyId
+                    api_key_id: keyId
 
                 },
                 headers: {
@@ -325,7 +325,7 @@ export default function APIKeysPage() {
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-8">
                         <h1 className="text-3xl font-bold mb-2">Developer Portal</h1>
-                        <p className="text-muted-foreground">Manage your API keys to access Dograh services programmatically</p>
+                        <p className="text-muted-foreground">Manage your API keys to access IntellifyAi services programmatically</p>
                     </div>
 
                     {error && (
@@ -388,9 +388,8 @@ export default function APIKeysPage() {
                                     {apiKeys.map((key) => (
                                         <div
                                             key={key.id}
-                                            className={`flex items-center justify-between p-4 border rounded-lg ${
-                                                key.archived_at ? 'bg-muted opacity-60' : 'bg-card'
-                                            }`}
+                                            className={`flex items-center justify-between p-4 border rounded-lg ${key.archived_at ? 'bg-muted opacity-60' : 'bg-card'
+                                                }`}
                                         >
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-1">
@@ -442,14 +441,14 @@ export default function APIKeysPage() {
                         </CardContent>
                     </Card>
 
-                    {/* Dograh Service Keys Section */}
+                    {/* IntellifyAi Service Keys Section */}
                     <Card className="mb-6">
                         <CardHeader>
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <CardTitle>Dograh Service Keys</CardTitle>
+                                    <CardTitle>IntellifyAi Service Keys</CardTitle>
                                     <CardDescription>
-                                        Manage service keys for accessing Dograh AI services (LLM, TTS, STT)
+                                        Manage service keys for accessing IntellifyAi AI services (LLM, TTS, STT)
                                     </CardDescription>
                                 </div>
                                 <div className="flex gap-2">
@@ -473,7 +472,7 @@ export default function APIKeysPage() {
                                         </Button>
                                     ) : (
                                         <span className="text">
-                                            To generate additional service keys, <a href="https://app.dograh.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sign up on app.dograh.com</a>
+                                            To generate additional service keys, <a href="https://app.intellifyai.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Sign up on app.intellifyai.com</a>
                                         </span>
                                     )}
                                 </div>
@@ -507,9 +506,8 @@ export default function APIKeysPage() {
                                     {serviceKeys.map((key) => (
                                         <div
                                             key={key.id}
-                                            className={`flex items-center justify-between p-4 border rounded-lg ${
-                                                key.archived_at ? 'bg-muted opacity-60' : 'bg-card'
-                                            }`}
+                                            className={`flex items-center justify-between p-4 border rounded-lg ${key.archived_at ? 'bg-muted opacity-60' : 'bg-card'
+                                                }`}
                                         >
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-1">
@@ -647,7 +645,7 @@ export default function APIKeysPage() {
                     <DialogHeader>
                         <DialogTitle>Create New Service Key</DialogTitle>
                         <DialogDescription>
-                            Create a service key to access Dograh AI services (LLM, TTS, STT)
+                            Create a service key to access Intellify AI services (LLM, TTS, STT)
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
@@ -700,7 +698,7 @@ export default function APIKeysPage() {
                             </div>
                             <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                                 <p className="text-sm text-blue-600 dark:text-blue-500">
-                                    This key provides access to Dograh AI services including LLM, Text-to-Speech, and Speech-to-Text.
+                                    This key provides access to Intellify AI services including LLM, Text-to-Speech, and Speech-to-Text.
                                     {createdServiceKey.expires_at && (
                                         <span className="block mt-1">
                                             Expires on: {formatDate(createdServiceKey.expires_at)}

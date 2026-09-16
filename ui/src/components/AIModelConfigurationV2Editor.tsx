@@ -271,22 +271,22 @@ function optionalByokService(config: Record<string, unknown>, service: ServiceSe
     return serviceConfiguration;
 }
 
-function ThirdPartyProviderNotice() {
-    return (
-        <div className="mt-4 flex gap-3 rounded-md border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200">
-            <Info className="mt-0.5 h-4 w-4 shrink-0" />
-            <div>
-                <p className="font-medium">Third-party provider data notice</p>
-                <p className="mt-1 leading-6">
-                    Dograh sends data required by the selected model service. This may include prompts,
-                    transcripts, audio, generated text, tool data, and request metadata depending on the
-                    provider and service type. Review the provider&apos;s data and retention policies before
-                    using sensitive data.
-                </p>
-            </div>
-        </div>
-    );
-}
+// function ThirdPartyProviderNotice() {
+//     return (
+//         <div className="mt-4 flex gap-3 rounded-md border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200">
+//             <Info className="mt-0.5 h-4 w-4 shrink-0" />
+//             <div>
+//                 <p className="font-medium">Third-party provider data notice</p>
+//                 <p className="mt-1 leading-6">
+//                     Dograh sends data required by the selected model service. This may include prompts,
+//                     transcripts, audio, generated text, tool data, and request metadata depending on the
+//                     provider and service type. Review the provider&apos;s data and retention policies before
+//                     using sensitive data.
+//                 </p>
+//             </div>
+//         </div>
+//     );
+// }
 
 function formatPricePerMinute(price: ModelConfigurationMetricPrice): string {
     return new Intl.NumberFormat("en-US", {
@@ -460,7 +460,7 @@ export function AIModelConfigurationV2Editor({
             <Tabs value={mode} onValueChange={(value) => setMode(value as ModelMode)} className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger value="realtime">Speech to Speech</TabsTrigger>
-                    <TabsTrigger value="dograh">Dograh</TabsTrigger>
+                    <TabsTrigger value="dograh">Intellify AI</TabsTrigger>
                     <TabsTrigger value="byok">BYOK</TabsTrigger>
                 </TabsList>
 
@@ -478,7 +478,7 @@ export function AIModelConfigurationV2Editor({
                         submitLabel={submitLabel}
                         onSave={saveByokConfiguration}
                     />
-                    <ThirdPartyProviderNotice />
+                    {/* <ThirdPartyProviderNotice /> */}
                 </TabsContent>
 
                 <TabsContent value="dograh" className="mt-0">
@@ -586,7 +586,7 @@ export function AIModelConfigurationV2Editor({
                         submitLabel={submitLabel}
                         onSave={saveByokConfiguration}
                     />
-                    <ThirdPartyProviderNotice />
+                    {/* <ThirdPartyProviderNotice /> */}
                 </TabsContent>
             </Tabs>
         </div>

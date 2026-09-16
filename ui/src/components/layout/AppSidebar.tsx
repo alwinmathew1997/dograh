@@ -217,7 +217,7 @@ export function AppSidebar() {
         className={cn(
           "rounded-xl transition-colors hover:bg-accent hover:text-accent-foreground",
           isItemActive &&
-            "bg-cta/15 font-semibold text-foreground hover:bg-cta/20 hover:text-foreground"
+          "bg-cta/15 font-semibold text-foreground hover:bg-cta/20 hover:text-foreground"
         )}
       >
         <Link
@@ -290,32 +290,32 @@ export function AppSidebar() {
 
   // "Hire an Expert" CTA, rendered INSIDE the shared footer pill next to the
   // profile icon. Expanded: label pill filling the row. Collapsed: icon-only.
-  const hireExpertButton = isCollapsed ? (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          size="icon"
-          className="h-7 w-7 rounded-full"
-          onClick={() => openHireExpert("sidebar")}
-          aria-label="Hire an Expert"
-        >
-          <UserRound className="h-3.5 w-3.5" />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent side="right">
-        <p>Hire an Expert</p>
-      </TooltipContent>
-    </Tooltip>
-  ) : (
-    <Button
-      size="sm"
-      className="h-7 gap-1.5 rounded-full px-3 text-xs"
-      onClick={() => openHireExpert("sidebar")}
-    >
-      <UserRound className="h-3.5 w-3.5" />
-      Hire an Expert
-    </Button>
-  );
+  // const hireExpertButton = isCollapsed ? (
+  //   <Tooltip>
+  //     <TooltipTrigger asChild>
+  //       <Button
+  //         size="icon"
+  //         className="h-7 w-7 rounded-full"
+  //         onClick={() => openHireExpert("sidebar")}
+  //         aria-label="Hire an Expert"
+  //       >
+  //         <UserRound className="h-3.5 w-3.5" />
+  //       </Button>
+  //     </TooltipTrigger>
+  //     <TooltipContent side="right">
+  //       <p>Hire an Expert</p>
+  //     </TooltipContent>
+  //   </Tooltip>
+  // ) : (
+  //   <Button
+  //     size="sm"
+  //     className="h-7 gap-1.5 rounded-full px-3 text-xs"
+  //     onClick={() => openHireExpert("sidebar")}
+  //   >
+  //     <UserRound className="h-3.5 w-3.5" />
+  //     Hire an Expert
+  //   </Button>
+  // );
 
   return (
     <Sidebar collapsible="icon" variant="floating" className="app-sidebar-dock py-4">
@@ -448,7 +448,7 @@ export function AppSidebar() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              {hireExpertButton}
+              {/* {hireExpertButton} */}
             </div>
           )}
 
@@ -489,7 +489,7 @@ export function AppSidebar() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              {hireExpertButton}
+              {/* {hireExpertButton} */}
             </div>
           )}
 
